@@ -1,65 +1,616 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ban all mining on Aravalli</title>
+    <title>Ban all mining on Aravalli | Advocacy Report</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Lora', 'serif'],
+                    },
+                    colors: {
+                        forest: {
+                            50: '#f2f7f4',
+                            100: '#e1ede6',
+                            200: '#c4dacd',
+                            300: '#99bfa9',
+                            400: '#689c7d',
+                            500: '#477f5f',
+                            600: '#356449',
+                            700: '#2c513c',
+                            800: '#244231',
+                            900: '#1e3729',
+                            950: '#101f17',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-        body, html { margin: 0; padding: 0; font-family: "Segoe UI", Arial, sans-serif; color: #333; line-height: 1.8; scroll-behavior: smooth; background: linear-gradient(to bottom, #e6f2ff, #f9f9f9); }
-        .starter-container { height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
-        .white-box { width: 90%; height: 85vh; background-color: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-radius: 15px; }
-        .white-box h1 { font-size: 3.5rem; color: #004d00; margin: 0; padding: 0 20px; }
-        .scroll-hint { margin-top: 30px; font-size: 1.1rem; color: #999; animation: bounce 2s infinite; }
-        .main-document { padding: 40px 20px 80px 20px; display: flex; flex-direction: column; align-items: center; }
-        .container { max-width: 850px; width: 100%; background: white; padding: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 12px; }
-        h2 { color: #cc3300; margin-top: 40px; border-left: 6px solid #cc3300; padding-left: 15px; }
-        p { margin-bottom: 25px; font-size: 1.1rem; }
-        .meta-info { color: #555; margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
-        footer { text-align: center; margin-top: 50px; color: #888; font-size: 0.9rem; border-top: 1px solid #ddd; padding-top: 20px; }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(71, 127, 95, 0.3);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(71, 127, 95, 0.6);
+        }
+
+        /* Reading Progress Indicator */
+        #progress-bar {
+            height: 4px;
+            width: 0%;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Subtle Animation Keyframes */
+        @keyframes pulse-soft {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.02); }
+        }
+        .animate-pulse-soft {
+            animation: pulse-soft 3s infinite ease-in-out;
+        }
     </style>
 </head>
-<body>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased transition-colors duration-300 dark:bg-zinc-900 dark:text-zinc-200">
 
-    <div class="starter-container">
-        <div class="white-box">
-            <h1>Ban all mining on Aravalli</h1>
-            <div class="scroll-hint">Scroll down to read the document ↓</div>
+    <!-- Sticky Top Navigation -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-stone-200/80 dark:bg-zinc-900/80 dark:border-zinc-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Branding -->
+                <div class="flex items-center space-x-3">
+                    <span class="p-2 bg-forest-100 dark:bg-forest-900/40 text-forest-700 dark:text-forest-400 rounded-lg">
+                        <i data-lucide="mountain-snow" class="w-6 h-6"></i>
+                    </span>
+                    <span class="font-serif font-bold text-lg tracking-tight text-forest-900 dark:text-white hidden sm:block">Aravalli Protection Portal</span>
+                </div>
+
+                <!-- Interactive Utilities Bar -->
+                <div class="flex items-center space-x-2 sm:space-x-4">
+                    <!-- Text Size Adjusters -->
+                    <div class="flex items-center bg-stone-100 dark:bg-zinc-800 rounded-lg p-1 text-xs">
+                        <button onclick="adjustFontSize(-1)" class="p-1 px-2 hover:bg-white dark:hover:bg-zinc-700 rounded transition" title="Decrease font size">A-</button>
+                        <button onclick="resetFontSize()" class="p-1 px-2 hover:bg-white dark:hover:bg-zinc-700 rounded transition" title="Default size">Reset</button>
+                        <button onclick="adjustFontSize(1)" class="p-1 px-2 hover:bg-white dark:hover:bg-zinc-700 rounded transition" title="Increase font size">A+</button>
+                    </div>
+
+                    <!-- Theme Selector Dropdown / Buttons -->
+                    <div class="flex items-center space-x-1 bg-stone-100 dark:bg-zinc-800 rounded-lg p-1">
+                        <button onclick="setTheme('light')" id="theme-btn-light" class="p-1.5 rounded transition hover:bg-white dark:hover:bg-zinc-700" title="Editorial Light Mode">
+                            <i data-lucide="sun" class="w-4 h-4 text-amber-600"></i>
+                        </button>
+                        <button onclick="setTheme('dark')" id="theme-btn-dark" class="p-1.5 rounded transition hover:bg-white dark:hover:bg-zinc-700" title="Obsidian Dark Mode">
+                            <i data-lucide="moon" class="w-4 h-4 text-indigo-400"></i>
+                        </button>
+                        <button onclick="setTheme('forest')" id="theme-btn-forest" class="p-1.5 rounded transition hover:bg-white dark:hover:bg-zinc-700" title="Eco Green Mode">
+                            <i data-lucide="leaf" class="w-4 h-4 text-emerald-600"></i>
+                        </button>
+                    </div>
+
+                    <!-- Read Status Badge -->
+                    <div class="hidden md:flex items-center space-x-1.5 px-3 py-1 bg-forest-50 dark:bg-forest-950 text-forest-700 dark:text-forest-300 text-xs font-semibold rounded-full border border-forest-200/55 dark:border-forest-900/50">
+                        <span class="w-1.5 h-1.5 rounded-full bg-forest-500 animate-pulse"></span>
+                        <span id="reading-time">3 min read</span>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+        <!-- Reading Progress Tracker -->
+        <div class="w-full bg-stone-200 dark:bg-zinc-800 h-1">
+            <div id="progress-bar" class="bg-forest-600 dark:bg-forest-400"></div>
+        </div>
+    </header>
 
-    <div class="main-document">
-        <div class="container">
-            <div class="meta-info">
-                <strong>Author:</strong> Alia Bajaj | <strong>Date:</strong> January 23, 2026
+    <!-- Beautiful Parallax Hero Header Section -->
+    <section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-forest-950 via-forest-900 to-stone-900 text-white px-4 py-20">
+        <!-- SVG Forest Contour Overlay Lines -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path fill="#ffffff" fill-opacity="1" d="M0,224L60,208C120,192,240,160,360,165.3C480,171,600,213,720,213.3C840,213,960,171,1080,149.3C1200,128,1320,128,1380,128L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+            </svg>
+        </div>
+        
+        <div class="relative max-w-4xl mx-auto text-center z-10 space-y-8">
+            <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-xs font-semibold uppercase tracking-wider text-emerald-300">
+                <i data-lucide="scale" class="w-3.5 h-3.5"></i>
+                <span>Ecological Protection Report</span>
+            </div>
+            
+            <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.15]">
+                Ban all mining on Aravalli
+            </h1>
+            
+            <p class="text-stone-300 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+                An analytical overview on Supreme Court regulations, environmental impact statistics, and conservation efforts concerning the oldest fold mountain range on Earth.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-6 text-sm text-stone-300 pt-4 border-t border-white/10 max-w-lg mx-auto">
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="user" class="w-4.5 h-4.5 text-forest-400"></i>
+                    <span>Author: <strong class="text-white">Alia Bajaj</strong></span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="calendar" class="w-4.5 h-4.5 text-forest-400"></i>
+                    <span>Published: <strong class="text-white">January 23, 2026</strong></span>
+                </div>
             </div>
 
-            <h2>The 1992 landmark of the supreme court</h2>
-            <p>In 1992 the supreme court of India passed a landmark that banned all mining on the Aravalli hill range but it only applied to Aravalli hills which were 100m or above that in height. More than 90% of the hills in Aravalli range are below 100m and were not provided with legal protection whereas only 8- 9 % of hills in the range were above 100m which means that mining was permitted on most of the hills with a government on SC approved lease.</p>
-
-            <h2>Mining leases permitted</h2>
-            <p>After the order in 1992 many more leases were permitted which led to 31 % of harm done to the Aravalli’s till date. Most of the hills have been flattened, hollowed out or the thick layer of trees is thinned. Mining leases in India are permitted for 20 – 30 years and can be renewed if permitted. With mining leases permitted for such a long period of time, a lot of harm is done and will be done to the Aravalli’s if not taken care of.</p>
-
-            <h2>Public reaction</h2>
-            <p>After the new landmark passed by the supreme court the public had a very mixed reaction. Environmentalists and activists took this as the first step to save the Aravalli’s and celebrated the new landmark with joy, but some companies and mine workers started protesting that banning mining on the Aravalli’s will destroy livelihood and cause damage to the economy. The central government supported the courts ecological reasoning while the state government saw it as unemployment for the people and made several failed attempts to remove the ban.</p>
-
-            <h2>2025 New order by the supreme court</h2>
-            <p>By the end of 2025 the supreme court has now passed a new order regarding the matter. The supreme court banned mining from any hill in Aravalli and banned any further permission for mining lease on Aravalli in the future. The court also stated that no new mining leases will be permitted but existed leases will continue till their expiry with no renewals.</p>
-
-            <h2>Existing leases</h2>
-            <p>Even after the new order passed there were still a lot of old leases which could do a lot of harm to the hill range. The list of old leases and their expiry have not been published with the public but it is estimated that most of them could end in the early 2030 but some of them can last even longer meaning more harm to the Aravalli range. There are still a lot of existing leases like Rajasthan has about 1200 existing mining leases.</p>
-
-            <h2>Effects of mining on the Aravalli’s</h2>
-            <p>Mining is a process in which the land is dug to find precious minerals but it is also one of the biggest dangers to the environment. It causes erosion, loss of minerals in the soil and can sometimes also flatten out hills or mountains. The Aravalli’s have lost most of their biodiversity, greenery and the fresh air that once was there because of mining done by us humans for materialistic possession. The thick layers of greenery have thinned, some hills have been flattened, soil erosion is increasing, the fresh is getting polluted and Aravalli is losing its biodiversity. Mining has done 31% harm to the Aravalli’s now even if the existing leases continue it could cause 5- 10 % of more damage. Even the existing leases till there expiry date can harm the hills and provide more damage if we don’t stop now.</p>
-
-            <h2>The January 21st order by the SC</h2>
-            <p>On January 21st the supreme court released a new order putting an absolute halt to illegal mining on the Aravalli’s and the controversial 100m rule is now officially suspended. The supreme court has received assurance from the Rajasthan government to stop all illegal mining on Aravalli. The court has blocked all new mining and mining renewal requests. The court has also decided to create a new committee of independent experts that will ensure that all illegal mining on the hills is stopped and that the range is redefined scientifically to prevent irreversible damage.</p>
-
-            <h2>We need to act now</h2>
-            <p>Humans have been blinded with greed for more money and power that we are not realizing what we are doing to the world, to the environment which gave us survival, which fulfilled all our needs and gave us a place to live. We are doing other things than destroying the Aravalli which is equally destroying the environment which helped us grow and reach so far in life. We must always remember that we are dependent on nature and that the environment doesn’t need us to survive. By destroying the Aravalli’s we are forcing other living beings out of their homes making them homeless and destroying natural beauty.</p>
-
-            <footer>© 2026 Alia Bajaj | Aravalli Conservation Project</footer>
+            <!-- Scroll Indicator Icon -->
+            <div class="pt-8">
+                <a href="#report-dashboard" class="inline-flex flex-col items-center text-xs text-stone-400 hover:text-white transition duration-200">
+                    <span class="mb-2 animate-bounce">Scroll to Read Document</span>
+                    <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                </a>
+            </div>
         </div>
+    </section>
+
+    <!-- Live Insights Metrics Dashboard -->
+    <section id="report-dashboard" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-20 pb-12">
+        <div class="bg-white dark:bg-zinc-800 rounded-2xl shadow-xl border border-stone-200/60 dark:border-zinc-700/65 p-6 sm:p-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Stat Card 1 -->
+                <div class="p-5 bg-gradient-to-br from-stone-50 to-stone-100/50 dark:from-zinc-800/50 dark:to-zinc-800/80 rounded-xl border border-stone-100 dark:border-zinc-700/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between text-stone-500 dark:text-zinc-400 mb-2">
+                            <span class="text-xs uppercase font-semibold tracking-wider">Aravalli Damage</span>
+                            <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-500"></i>
+                        </div>
+                        <h3 class="text-4xl font-bold text-forest-900 dark:text-white font-serif">31%</h3>
+                    </div>
+                    <p class="text-xs text-stone-500 dark:text-zinc-400 mt-3">Of the Aravallis harmed to date through flattening, thinning & hollowed hills.</p>
+                </div>
+
+                <!-- Stat Card 2 -->
+                <div class="p-5 bg-gradient-to-br from-stone-50 to-stone-100/50 dark:from-zinc-800/50 dark:to-zinc-800/80 rounded-xl border border-stone-100 dark:border-zinc-700/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between text-stone-500 dark:text-zinc-400 mb-2">
+                            <span class="text-xs uppercase font-semibold tracking-wider">Rajasthan Leases</span>
+                            <i data-lucide="file-text" class="w-5 h-5 text-forest-600 dark:text-forest-400"></i>
+                        </div>
+                        <h3 class="text-4xl font-bold text-forest-900 dark:text-white font-serif">~1200</h3>
+                    </div>
+                    <p class="text-xs text-stone-500 dark:text-zinc-400 mt-3">Active mining leases currently present in the State of Rajasthan.</p>
+                </div>
+
+                <!-- Stat Card 3 -->
+                <div class="p-5 bg-gradient-to-br from-stone-50 to-stone-100/50 dark:from-zinc-800/50 dark:to-zinc-800/80 rounded-xl border border-stone-100 dark:border-zinc-700/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between text-stone-500 dark:text-zinc-400 mb-2">
+                            <span class="text-xs uppercase font-semibold tracking-wider">Crucial Threshold Rule</span>
+                            <i data-lucide="gavel" class="w-5 h-5 text-red-500"></i>
+                        </div>
+                        <h3 class="text-4xl font-bold text-forest-900 dark:text-white font-serif">100m</h3>
+                    </div>
+                    <p class="text-xs text-stone-500 dark:text-zinc-400 mt-3">The controversial rule height limit now officially suspended by the Supreme Court.</p>
+                </div>
+
+                <!-- Stat Card 4 -->
+                <div class="p-5 bg-gradient-to-br from-stone-50 to-stone-100/50 dark:from-zinc-800/50 dark:to-zinc-800/80 rounded-xl border border-stone-100 dark:border-zinc-700/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between text-stone-500 dark:text-zinc-400 mb-2">
+                            <span class="text-xs uppercase font-semibold tracking-wider">Critical Stop Order</span>
+                            <i data-lucide="shield-check" class="w-5 h-5 text-emerald-500"></i>
+                        </div>
+                        <h3 class="text-4xl font-bold text-forest-900 dark:text-white font-serif">Jan 21</h3>
+                    </div>
+                    <p class="text-xs text-stone-500 dark:text-zinc-400 mt-3">New Supreme Court order putting an absolute halt to illegal mining activities.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Workspace Grid -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            
+            <!-- Left Sidebar Desktop Navigation -->
+            <aside class="hidden lg:block lg:col-span-3 sticky top-24 self-start space-y-6">
+                
+                <!-- Table of Contents Dynamic Sidebar Card -->
+                <div class="bg-white dark:bg-zinc-800 rounded-xl p-5 shadow-sm border border-stone-200/80 dark:border-zinc-700/50">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-stone-400 dark:text-zinc-500 mb-4 flex items-center space-x-2">
+                        <i data-lucide="book-open" class="w-4 h-4"></i>
+                        <span>Table of Contents</span>
+                    </h4>
+                    <nav class="space-y-1" id="toc-nav">
+                        <a href="#sec-landmark" class="toc-link block px-3 py-2 text-sm rounded-lg text-stone-600 hover:bg-stone-50 hover:text-forest-700 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-emerald-400 transition font-medium border-l-2 border-transparent">1992 SC Landmark</a>
+                        <a href="#sec-leases" class="toc-link block px-3 py-2 text-sm rounded-lg text-stone-600 hover:bg-stone-50 hover:text-forest-700 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-emerald-400 transition font-medium border-l-2 border-transparent">Permitted Leases</a>
+                        <a href="#sec-reaction" class="toc-link block px-3 py-2 text-sm rounded-lg text-stone-600 hover:bg-stone-50 hover:text-forest-700 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-emerald-400 transition font-medium border-l-2 border-transparent">Public Reaction</a>
+                        <a href="#sec-new-order" class="toc-link block px-3 py-2 text-sm rounded-lg text-stone-600 hover:bg-stone-50 hover:text-forest-700 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-emerald-400 transition font-medium border-l-2 border-transparent">2025 New Order</a>
+                        <a href="#sec-existing" class="toc-link block px-3 py-2 text-sm rounded-lg text-stone-600 hover:bg-stone-50 hover:text-forest-700 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-emerald-400 transition font-medium border-l-2 border-transparent">Existing Leases</a>
+                        <a href="#sec-effects" class="toc-link block px-3 py-2 text-sm rounded-lg text-stone-600 hover:bg-stone-50 hover:text-forest-700 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-emerald-400 transition font-medium border-l-2 border-transparent">Effects of Mining</a>
+                        <a href="#sec-jan-order" class="toc-link block px-3 py-2 text-sm rounded-lg text-stone-600 hover:bg-stone-50 hover:text-forest-700 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-emerald-400 transition font-medium border-l-2 border-transparent">January 21st Order</a>
+                        <a href="#sec-act" class="toc-link block px-3 py-2 text-sm rounded-lg text-stone-600 hover:bg-stone-50 hover:text-forest-700 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-emerald-400 transition font-medium border-l-2 border-transparent">Call to Action</a>
+                    </nav>
+                </div>
+
+                <!-- Document Stats Metadata Section -->
+                <div class="bg-gradient-to-tr from-forest-900 to-forest-800 text-white rounded-xl p-5 shadow-sm space-y-4">
+                    <h5 class="text-xs uppercase font-bold tracking-wider text-forest-200">Aravalli Mountains</h5>
+                    <p class="text-xs text-forest-100 leading-relaxed">
+                        One of the oldest fold mountain systems globally, acting as a crucial green barrier preventing desertification of North India.
+                    </p>
+                    <div class="text-[10px] bg-white/10 px-2 py-1 rounded inline-block text-white">
+                        Conservation Report 2026
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Editorial Paper Content Panel -->
+            <article class="col-span-12 lg:col-span-9 space-y-8 bg-white dark:bg-zinc-800/90 rounded-2xl p-6 sm:p-12 shadow-sm border border-stone-200/60 dark:border-zinc-700/55 transition-all">
+                
+                <!-- Live In-Document Search Tool -->
+                <div class="relative max-w-md ml-auto pb-4 border-b border-stone-100 dark:border-zinc-700">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-stone-400 dark:text-zinc-500 pointer-events-none">
+                        <i data-lucide="search" class="w-4 h-4"></i>
+                    </span>
+                    <input type="text" id="document-search" onkeyup="filterContent()" placeholder="Search in report..." class="block w-full pl-9 pr-4 py-2 text-sm bg-stone-50 dark:bg-zinc-700/50 border border-stone-200 dark:border-zinc-600 rounded-lg focus:ring-2 focus:ring-forest-500/20 focus:border-forest-500 outline-none text-stone-800 dark:text-zinc-200 transition">
+                </div>
+
+                <!-- Main Content Dynamic Container -->
+                <div id="editorial-body" class="space-y-12 text-stone-700 dark:text-zinc-300 leading-relaxed">
+
+                    <!-- Section 1 -->
+                    <section id="sec-landmark" class="section-card group relative pt-2">
+                        <div class="absolute -left-6 top-3 hidden md:flex items-center justify-center text-stone-300 group-hover:text-forest-600 transition duration-300">
+                            <i data-lucide="hash" class="w-5 h-5"></i>
+                        </div>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-stone-900 dark:text-white mb-4 tracking-tight flex items-center space-x-2">
+                            <span class="text-forest-600 dark:text-forest-400 font-sans text-lg mr-2 font-bold select-none">01</span>
+                            The 1992 landmark of the supreme court
+                        </h2>
+                        <div class="prose prose-stone dark:prose-invert max-w-none text-base sm:text-[1.1rem]">
+                            <p class="first-letter:text-5xl first-letter:font-serif first-letter:font-bold first-letter:text-forest-800 dark:first-letter:text-forest-300 first-letter:mr-3 first-letter:float-left first-letter:leading-[0.8] mb-4">
+                                In 1992 the supreme court of India passed a landmark that banned all mining on the Aravalli hill range but it only applied to Aravalli hills which were 100m or above that in height. More than 90% of the hills in Aravalli range are below 100m and were not provided with legal protection whereas only 8- 9 % of hills in the range were above 100m which means that mining was permitted on most of the hills with a government on SC approved lease.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Section 2 -->
+                    <section id="sec-leases" class="section-card group relative pt-2">
+                        <div class="absolute -left-6 top-3 hidden md:flex items-center justify-center text-stone-300 group-hover:text-forest-600 transition duration-300">
+                            <i data-lucide="hash" class="w-5 h-5"></i>
+                        </div>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-stone-900 dark:text-white mb-4 tracking-tight flex items-center space-x-2">
+                            <span class="text-forest-600 dark:text-forest-400 font-sans text-lg mr-2 font-bold select-none">02</span>
+                            Mining leases permitted
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-6 bg-stone-50 dark:bg-zinc-800 p-5 rounded-xl border border-stone-200/50 dark:border-zinc-700/60">
+                            <div class="md:col-span-2 text-stone-600 dark:text-zinc-300">
+                                <p class="mb-0">
+                                    After the order in 1992 many more leases were permitted which led to 31 % of harm done to the Aravalli’s till date. Most of the hills have been flattened, hollowed out or the thick layer of trees is thinned. Mining leases in India are permitted for 20 – 30 years and can be renewed if permitted. With mining leases permitted for such a long period of time, a lot of harm is done and will be done to the Aravalli’s if not taken care of.
+                                </p>
+                            </div>
+                            <div class="flex flex-col justify-center items-center p-4 bg-white dark:bg-zinc-700 rounded-lg shadow-xs text-center border border-stone-200/45 dark:border-zinc-600">
+                                <span class="text-xs uppercase text-stone-400 font-bold">Lease Validity</span>
+                                <span class="text-2xl font-serif font-bold text-forest-700 dark:text-forest-300">20 - 30 Years</span>
+                                <span class="text-[10px] text-stone-400 mt-1">With long renewal pathways</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 3 -->
+                    <section id="sec-reaction" class="section-card group relative pt-2">
+                        <div class="absolute -left-6 top-3 hidden md:flex items-center justify-center text-stone-300 group-hover:text-forest-600 transition duration-300">
+                            <i data-lucide="hash" class="w-5 h-5"></i>
+                        </div>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-stone-900 dark:text-white mb-4 tracking-tight flex items-center space-x-2">
+                            <span class="text-forest-600 dark:text-forest-400 font-sans text-lg mr-2 font-bold select-none">03</span>
+                            Public reaction
+                        </h2>
+                        <div class="prose prose-stone dark:prose-invert max-w-none text-base sm:text-[1.1rem]">
+                            <p class="mb-4">
+                                After the new landmark passed by the supreme court the public had a very mixed reaction. Environmentalists and activists took this as the first step to save the Aravalli’s and celebrated the new landmark with joy, but some companies and mine workers started protesting that banning mining on the Aravalli’s will destroy livelihood and cause damage to the economy. The central government supported the courts ecological reasoning while the state government saw it as unemployment for the people and made several failed attempts to remove the ban.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Section 4 -->
+                    <section id="sec-new-order" class="section-card group relative pt-2">
+                        <div class="absolute -left-6 top-3 hidden md:flex items-center justify-center text-stone-300 group-hover:text-forest-600 transition duration-300">
+                            <i data-lucide="hash" class="w-5 h-5"></i>
+                        </div>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-stone-900 dark:text-white mb-4 tracking-tight flex items-center space-x-2">
+                            <span class="text-forest-600 dark:text-forest-400 font-sans text-lg mr-2 font-bold select-none">04</span>
+                            2025 New order by the supreme court
+                        </h2>
+                        <div class="relative pl-6 border-l-4 border-forest-600 dark:border-forest-400 bg-forest-50/50 dark:bg-forest-950/25 p-5 rounded-r-xl">
+                            <span class="absolute right-4 top-4 text-forest-200 dark:text-forest-800">
+                                <i data-lucide="gavel" class="w-12 h-12"></i>
+                            </span>
+                            <p class="mb-0 text-base sm:text-[1.1rem]">
+                                By the end of 2025 the supreme court has now passed a new order regarding the matter. The supreme court banned mining from any hill in Aravalli and banned any further permission for mining lease on Aravalli in the future. The court also stated that no new mining leases will be permitted but existed leases will continue till their expiry with no renewals.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Section 5 -->
+                    <section id="sec-existing" class="section-card group relative pt-2">
+                        <div class="absolute -left-6 top-3 hidden md:flex items-center justify-center text-stone-300 group-hover:text-forest-600 transition duration-300">
+                            <i data-lucide="hash" class="w-5 h-5"></i>
+                        </div>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-stone-900 dark:text-white mb-4 tracking-tight flex items-center space-x-2">
+                            <span class="text-forest-600 dark:text-forest-400 font-sans text-lg mr-2 font-bold select-none">05</span>
+                            Existing leases
+                        </h2>
+                        <div class="prose prose-stone dark:prose-invert max-w-none text-base sm:text-[1.1rem]">
+                            <p class="mb-4">
+                                Even after the new order passed there were still a lot of old leases which could do a lot of harm to the hill range. The list of old leases and their expiry have not been published with the public but it is estimated that most of them could end in the early 2030 but some of them can last even longer meaning more harm to the Aravalli range. There are still a lot of existing leases like Rajasthan has about 1200 existing mining leases.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Section 6 -->
+                    <section id="sec-effects" class="section-card group relative pt-2">
+                        <div class="absolute -left-6 top-3 hidden md:flex items-center justify-center text-stone-300 group-hover:text-forest-600 transition duration-300">
+                            <i data-lucide="hash" class="w-5 h-5"></i>
+                        </div>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-stone-900 dark:text-white mb-4 tracking-tight flex items-center space-x-2">
+                            <span class="text-forest-600 dark:text-forest-400 font-sans text-lg mr-2 font-bold select-none">06</span>
+                            Effects of mining on the Aravalli’s
+                        </h2>
+                        <div class="prose prose-stone dark:prose-invert max-w-none text-base sm:text-[1.1rem] space-y-4">
+                            <p>
+                                Mining is a process in which the land is dug to find precious minerals but it is also one of the biggest dangers to the environment. It causes erosion, loss of minerals in the soil and can sometimes also flatten out hills or mountains. The Aravalli’s have lost most of their biodiversity, greenery and the fresh air that once was there because of mining done by us humans for materialistic possession. The thick layers of greenery have thinned, some hills have been flattened, soil erosion is increasing, the fresh is getting polluted and Aravalli is losing its biodiversity. Mining has done 31% harm to the Aravalli’s now even if the existing leases continue it could cause 5- 10 % of more damage. Even the existing leases till there expiry date can harm the hills and provide more damage if we don’t stop now.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Section 7 -->
+                    <section id="sec-jan-order" class="section-card group relative pt-2">
+                        <div class="absolute -left-6 top-3 hidden md:flex items-center justify-center text-stone-300 group-hover:text-forest-600 transition duration-300">
+                            <i data-lucide="hash" class="w-5 h-5"></i>
+                        </div>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-stone-900 dark:text-white mb-4 tracking-tight flex items-center space-x-2">
+                            <span class="text-forest-600 dark:text-forest-400 font-sans text-lg mr-2 font-bold select-none">07</span>
+                            The January 21st order by the SC
+                        </h2>
+                        <div class="prose prose-stone dark:prose-invert max-w-none text-base sm:text-[1.1rem] bg-stone-50 dark:bg-zinc-800 p-6 rounded-xl border border-l-4 border-l-rose-500 border-stone-200/50 dark:border-zinc-700">
+                            <p class="mb-0">
+                                On January 21st the supreme court released a new order putting an absolute halt to illegal mining on the Aravalli’s and the controversial 100m rule is now officially suspended. The supreme court has received assurance from the Rajasthan government to stop all illegal mining on Aravalli. The court has blocked all new mining and mining renewal requests. The court has also decided to create a new committee of independent experts that will ensure that all illegal mining on the hills is stopped and that the range is redefined scientifically to prevent irreversible damage.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Section 8 -->
+                    <section id="sec-act" class="section-card group relative pt-2">
+                        <div class="absolute -left-6 top-3 hidden md:flex items-center justify-center text-stone-300 group-hover:text-forest-600 transition duration-300">
+                            <i data-lucide="hash" class="w-5 h-5"></i>
+                        </div>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-stone-900 dark:text-white mb-4 tracking-tight flex items-center space-x-2">
+                            <span class="text-forest-600 dark:text-forest-400 font-sans text-lg mr-2 font-bold select-none">08</span>
+                            We need to act now
+                        </h2>
+                        <div class="prose prose-stone dark:prose-invert max-w-none text-base sm:text-[1.1rem] text-stone-800 dark:text-zinc-200">
+                            <p class="italic font-medium text-lg text-forest-800 dark:text-forest-300 pl-4 border-l-2 border-forest-400 my-4">
+                                "We must always remember that we are dependent on nature and that the environment doesn’t need us to survive."
+                            </p>
+                            <p>
+                                Humans have been blinded with greed for more money and power that we are not realizing what we are doing to the world, to the environment which gave us survival, which fulfilled all our needs and gave us a place to live. We are doing other things than destroying the Aravalli which is equally destroying the environment which helped us grow and reach so far in life. We must always remember that we are dependent on nature and that the environment doesn’t need us to survive. By destroying the Aravalli’s we are forcing other living beings out of their homes making them homeless and destroying natural beauty.
+                            </p>
+                        </div>
+                    </section>
+
+                </div>
+
+                <!-- Footer within container -->
+                <footer class="pt-8 mt-12 border-t border-stone-200 dark:border-zinc-700 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500 dark:text-zinc-400">
+                    <p>© 2026 Alia Bajaj | Aravalli Conservation Project</p>
+                    <div class="flex space-x-4 mt-4 sm:mt-0">
+                        <button onclick="shareLink()" class="flex items-center space-x-1 hover:text-forest-600 transition">
+                            <i data-lucide="share-2" class="w-3.5 h-3.5"></i>
+                            <span>Copy Link</span>
+                        </button>
+                        <button onclick="window.print()" class="flex items-center space-x-1 hover:text-forest-600 transition">
+                            <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+                            <span>Print Report</span>
+                        </button>
+                    </div>
+                </footer>
+            </article>
+
+        </div>
+    </main>
+
+    <!-- Floating Back To Top Button -->
+    <button id="back-to-top" onclick="scrollToTop()" class="fixed bottom-6 right-6 p-3 bg-forest-600 text-white rounded-full shadow-lg hover:bg-forest-500 hover:scale-105 active:scale-95 transition-all opacity-0 pointer-events-none z-50">
+        <i data-lucide="arrow-up" class="w-5 h-5"></i>
+    </button>
+
+    <!-- Custom Notification/Message Box -->
+    <div id="custom-toast" class="fixed bottom-6 left-6 px-4 py-3 bg-stone-900 text-stone-100 dark:bg-white dark:text-stone-900 rounded-xl shadow-2xl flex items-center space-x-2 opacity-0 translate-y-4 pointer-events-none transition-all duration-300 z-50 text-sm">
+        <i data-lucide="info" class="w-4 h-4 text-emerald-400"></i>
+        <span id="toast-message">Copied to Clipboard!</span>
     </div>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // 1. Interactive Theme Switcher Logic
+        function setTheme(theme) {
+            const htmlEl = document.documentElement;
+            // Clean current classes
+            htmlEl.classList.remove('dark');
+            document.body.className = document.body.className.replace(/\bbg-\S+/g, '');
+            document.body.className = document.body.className.replace(/\btext-\S+/g, '');
+            
+            // Remove active style classes from buttons
+            document.querySelectorAll("[id^='theme-btn-']").forEach(btn => {
+                btn.classList.remove('bg-white', 'shadow-xs', 'dark:bg-zinc-700');
+            });
+
+            if (theme === 'dark') {
+                htmlEl.classList.add('dark');
+                document.body.classList.add('bg-zinc-900', 'text-zinc-200');
+                document.getElementById('theme-btn-dark').classList.add('bg-zinc-700', 'shadow-xs');
+                localStorage.setItem('aravalli-theme', 'dark');
+            } else if (theme === 'forest') {
+                htmlEl.classList.remove('dark');
+                document.body.classList.add('bg-emerald-50/40', 'text-stone-800');
+                document.getElementById('theme-btn-forest').classList.add('bg-white', 'shadow-xs');
+                localStorage.setItem('aravalli-theme', 'forest');
+            } else {
+                htmlEl.classList.remove('dark');
+                document.body.classList.add('bg-stone-50', 'text-stone-800');
+                document.getElementById('theme-btn-light').classList.add('bg-white', 'shadow-xs');
+                localStorage.setItem('aravalli-theme', 'light');
+            }
+        }
+
+        // Initialize preferred theme on load
+        const storedTheme = localStorage.getItem('aravalli-theme') || 'light';
+        setTheme(storedTheme);
+
+        // 2. Reading Progress Tracker Logic
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+
+            // Show/Hide back-to-top button
+            const backToTopBtn = document.getElementById('back-to-top');
+            if (winScroll > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                backToTopBtn.classList.add('opacity-100');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+                backToTopBtn.classList.remove('opacity-100');
+            }
+
+            // Highlight Active Section in Table of Contents (TOC)
+            detectActiveSection();
+        });
+
+        // 3. Dynamic Section Highlighting in Sidebar TOC
+        const sections = document.querySelectorAll('.section-card');
+        const tocLinks = document.querySelectorAll('.toc-link');
+
+        function detectActiveSection() {
+            let activeId = '';
+            sections.forEach(sec => {
+                const rect = sec.getBoundingClientRect();
+                // If section is in the upper half of screen view
+                if (rect.top <= 160 && rect.bottom >= 160) {
+                    activeId = sec.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('border-forest-600', 'text-forest-700', 'bg-forest-50/70', 'dark:text-emerald-400', 'dark:bg-zinc-700/60');
+                if (link.getAttribute('href') === `#${activeId}`) {
+                    link.classList.add('border-forest-600', 'text-forest-700', 'bg-forest-50/70', 'dark:text-emerald-400', 'dark:bg-zinc-700/60');
+                }
+            });
+        }
+
+        // 4. Font Size Customization Engine
+        let baseFontSize = 1.1; // rem
+        function adjustFontSize(dir) {
+            baseFontSize += (dir * 0.05);
+            // Lock bounds to protect layout integrity
+            if(baseFontSize < 0.9) baseFontSize = 0.9;
+            if(baseFontSize > 1.4) baseFontSize = 1.4;
+
+            const contentParas = document.querySelectorAll('#editorial-body p');
+            contentParas.forEach(p => {
+                p.style.fontSize = `${baseFontSize}rem`;
+            });
+            showToast(`Font size adjusted to ${Math.round(baseFontSize * 100)}%`);
+        }
+
+        function resetFontSize() {
+            baseFontSize = 1.1;
+            const contentParas = document.querySelectorAll('#editorial-body p');
+            contentParas.forEach(p => {
+                p.style.fontSize = `1.1rem`;
+            });
+            showToast(`Font size reset to default`);
+        }
+
+        // 5. Back to Top Animation Handler
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 6. Native Clipboard Handler utilizing document.execCommand with dynamic visual toast
+        function shareLink() {
+            const dummy = document.createElement('input'),
+            text = window.location.href;
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+            showToast("Report link successfully copied to clipboard!");
+        }
+
+        // Custom non-blocking visual Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('custom-toast');
+            const toastText = document.getElementById('toast-message');
+            toastText.innerText = message;
+            
+            // Trigger animation
+            toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                toast.classList.remove('opacity-100', 'translate-y-0');
+            }, 3000);
+        }
+
+        // 7. Dynamic Instant Filter / Search
+        function filterContent() {
+            const query = document.getElementById('document-search').value.toLowerCase();
+            const sectionCards = document.querySelectorAll('.section-card');
+
+            sectionCards.forEach(card => {
+                const cardText = card.innerText.toLowerCase();
+                if (cardText.includes(query)) {
+                    card.style.display = 'block';
+                    card.style.opacity = '1';
+                } else {
+                    card.style.display = 'none';
+                    card.style.opacity = '0';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
